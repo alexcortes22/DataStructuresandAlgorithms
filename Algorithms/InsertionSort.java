@@ -2,6 +2,7 @@ public class InsertionSort{
 
     /*
         This method displays the InsertionSort algorithm.
+        @author Alex Cortes
         @param arr This is the array to be sorted
         @return int[]. The array that was input, sorted in ascending order 
 

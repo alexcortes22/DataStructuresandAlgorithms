@@ -2,6 +2,10 @@
 
 New repo to upload algorithms and data structures 
 
-## Subheader
+## Algorithms
 
-Testing out Git 
+Folder containing essential algorithms written in Java
+
+## Data Structures
+
+Folder containing data structures

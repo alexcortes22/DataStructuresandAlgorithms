@@ -1,7 +1,7 @@
 public class InsertionSort{
 
     /*
-        This method displays the InsertionSort algorithm.
+        This method displays the InsertionSort algorithm. Average and Worst Time Complexity of O(n^2). Best Time Complexity O(n)
         @author Alex Cortes
         @param arr This is the array to be sorted
         @return int[]. The array that was input, sorted in ascending order 

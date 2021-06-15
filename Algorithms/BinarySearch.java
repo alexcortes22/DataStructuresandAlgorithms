@@ -15,19 +15,19 @@ public class BinarySearch {
     public int binarySearch(int[] arr, int target, int lowerIndex, int upperIndex){
         //calculate the middle of the search parameter by adding the difference between the upper and 
         //index to the lower index.
-        int middle = lowerIndex + (upperIndex - lowerIndex) / 2;
+        int middle = (lowerIndex + upperIndex) / 2;
 
-        if(upperIndex > lowerIndex){
+        if(upperIndex >= lowerIndex){
             if (arr[middle] == target){
                 return middle;
             }
     
             if (target < arr[middle]){
-                return binarySearch(arr, target, 0, middle);
+                return binarySearch(arr, target, lowerIndex, middle - 1);
             }
     
             if (target > arr[middle]){
-                return binarySearch(arr, target, middle + 1, arr.length);
+                return binarySearch(arr, target, middle + 1, arr.length - 1);
             }
         }
         

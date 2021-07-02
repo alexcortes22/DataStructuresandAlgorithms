@@ -195,7 +195,7 @@ public class LinkedList <T> implements Iterable<T>{
         return -1;
     }
 
-
+    // method that determines if a value exists in the linked list
     public boolean contains(Object obj){
         return indexOf(obj) != -1;
     }

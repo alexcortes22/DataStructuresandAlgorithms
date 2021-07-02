@@ -156,7 +156,7 @@ public class BinaryTree <T extends Comparable <T>>{
     //traverse the tree in preorder
     private void preOrderTraversal(Node node){
         if (node == null) System.out.println("No node");
-        System.out.println(Node.data);
+        System.out.println(Node.data.toString());
         preOrderTraversal(node.left);
         preOrderTraversal(node.left);
     }

@@ -1,4 +1,4 @@
-import java.util.HashMap;
+import java.util.*;
 
 public class memoization {
 
@@ -36,17 +36,60 @@ public class memoization {
         return paths.get(key);
     }
 
-    public static boolean canSum(int targetSum, int[] numbers){
+    /*
+        CanSum: Write a function canSum(targetSum, numbers) that takes in a targetSum
+        and an array of numbers as arguments. The function should return a boolean
+        indicating whether or not its possible to generate the target sum using numbers
+        from the array. You may use an element of the array as many times as needed.
+        You may assume that all input numbers are non-negative.
+    */
+    public static boolean canSum(int targetSum, int[] numbers, HashMap<Integer, Boolean> canResults){
         //base cases
+        if(canResults.containsKey(targetSum)) return canResults.get(targetSum);
         if(targetSum == 0) return true;
         if(targetSum < 0) return false;
 
         for(int num: numbers){
             int remainder = targetSum - num;
-            if(canSum(remainder, numbers)) return true;
+            if(canSum(remainder, numbers, canResults)){
+                canResults.put(targetSum, true);
+                return true;
+            } 
+        }
+        canResults.put(targetSum, false);
+        return false;
+    }
+
+    /*
+        howSum: Write a function howSUm(targetSum, numbers) that takes in a targetSum and an array of 
+        numbers as arguments. The function should return an array containing any combination of elements
+        that add up to exactly the targetSum. If there is no combination that adds up to the target sum,
+        then return null. If there are are multiple combinations possible, you may return any single
+        one.
+    */
+    public static ArrayList<Integer> howSum(int targetSum, int[] numbers, ArrayList<Integer> result, 
+                                            HashMap<Integer, ArrayList<Integer>>memo){
+        //base cases
+        if(memo.containsKey(targetSum)) return memo.get(targetSum);
+        if(targetSum == 0){
+            return result;
         }
 
-        return false;
+        if(targetSum < 0) return null;
+
+        for(int num: numbers){
+            int remainder = targetSum - num;
+            ArrayList<Integer> remainderResult = howSum(remainder, numbers, result, memo);
+            if(remainderResult != null){
+                remainderResult.add(num);
+                result = remainderResult;
+                memo.put(targetSum, result);
+                return result;
+            }
+        }
+
+        memo.put(targetSum, null);
+        return null;
     }
     public static void main (String[] args){
         //HashMap for Fib memoization
@@ -58,11 +101,20 @@ public class memoization {
         HashMap<String,Long> computedPaths = new HashMap<String,Long>();
         long paths = gridTraveler(18, 18, computedPaths);
         System.out.println(paths); // should be 2333606220
+ 
+        //HashMap for CanSum memoization
+        HashMap<Integer, Boolean> canResults = new HashMap<Integer, Boolean>();
+        int[] nums = {7,14};
+        boolean sumResult = canSum(300, nums, canResults);
+        System.out.println(sumResult); //should print false
 
-        int[] nums = {2,3};
-        boolean sumResult = canSum(7, nums);
-
-        System.out.println(sumResult); //should print true
+        //We have to use a dynamic array and pass it to howSum
+        ArrayList<Integer> answer = new ArrayList<Integer>();
+        //HashMap for howSum memoization
+        HashMap<Integer, ArrayList<Integer>> memo = new HashMap<Integer, ArrayList<Integer>>();
+        int[] nums1 = {7, 14};
+        answer = howSum(300, nums1, answer, memo);
+        System.out.println(answer);
 
     }
 }

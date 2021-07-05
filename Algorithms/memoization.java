@@ -91,6 +91,9 @@ public class memoization {
         memo.put(targetSum, null);
         return null;
     }
+    /*
+        Test
+    */
     public static void main (String[] args){
         //HashMap for Fib memoization
         HashMap <Integer, Long> computed = new HashMap<Integer,Long>();

@@ -93,12 +93,6 @@ public class memoization {
 
         memo.put(targetSum, null);
         return null;
-<<<<<<< HEAD
-    }
-    /*
-        Test: To show on Repo
-    */
-=======
     } 
 
     /*
@@ -137,7 +131,27 @@ public class memoization {
         memo.put(targetSum, shortestArray);
         return shortestArray;
     } 
->>>>>>> af05b20cb81a7400dbe1eaa606cf288473591058
+
+    public static boolean canConstruct(String target, String[]wordBank, HashMap<String, Boolean> memo){
+        if(memo.containsKey(target)) return memo.get(target);
+
+        if(target == " "){
+            return true;
+        }
+
+        for(String word: wordBank){
+            if(target.indexOf(word) == 0){
+                String suffix = target.substring(word.length());
+                if(canConstruct(suffix, wordBank, memo)){
+                    memo.put(target, true);
+                    return true;
+                }
+            }
+        }
+
+        memo.put(target, false);
+        return false;
+    }
     public static void main (String[] args){
         //HashMap for Fib memoization
         HashMap <Integer, Long> computed = new HashMap<Integer,Long>();
@@ -171,7 +185,11 @@ public class memoization {
         bestMemo = howSum(8, nums2, bestMemo, memo1);
         System.out.println(bestMemo);
 
-       
+        //HashMap for canConstruct
+        HashMap <String, Boolean> memo2 = new HashMap <String, Boolean>();
+        String[] wordBank = {"e", "ee", "eee", "eeee", "eeeee", "eeeeee"};
+        Boolean result3 = canConstruct("eeeeeeeeeeeeeeeeeeeef", wordBank, memo2);
+        System.out.println(result3); //should be false
 
     }
 }

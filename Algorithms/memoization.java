@@ -81,8 +81,11 @@ public class memoization {
             int remainder = targetSum - num;
             ArrayList<Integer> remainderResult = howSum(remainder, numbers, result, memo);
             if(remainderResult != null){
+                //if the array isnt null, add the number that equals to target sum to the array
                 remainderResult.add(num);
+                //make the result equal to returned array
                 result = remainderResult;
+                //put it in the memo object
                 memo.put(targetSum, result);
                 return result;
             }
@@ -90,7 +93,44 @@ public class memoization {
 
         memo.put(targetSum, null);
         return null;
-    }
+    } 
+
+    /*
+        bestSum: Write a function that takes in a targetSum and an array of numbers as arguments.
+        The function should return an array containing the shortest combination of numbers that
+        add up to exactly the targetSum. If there is a tie, you may return any one of the shortest
+    */
+    public static ArrayList<Integer> bestSum(int targetSum, int[] numbers, ArrayList<Integer> result, 
+                                            HashMap<Integer, ArrayList<Integer>>memo){
+        //base cases
+        if(memo.containsKey(targetSum)) return memo.get(targetSum);
+        if(targetSum == 0){
+            return result;
+        }
+
+        if(targetSum < 0) return null;
+
+        ArrayList<Integer> shortestArray = new ArrayList<Integer>();
+
+        for(int num: numbers){
+            int remainder = targetSum - num;
+            ArrayList<Integer> remainderResult = new ArrayList<Integer>();
+            remainderResult = howSum(remainder, numbers, remainderResult, memo);
+            if(remainderResult != null){
+                //if the array isnt null, add the number that equals to target sum to the array
+                remainderResult.add(num);
+                //result = remainderResult;
+            
+                if(shortestArray == null || remainderResult.size() < shortestArray.size()){
+                    shortestArray = remainderResult;
+                }
+                
+            }
+        }
+
+        memo.put(targetSum, shortestArray);
+        return shortestArray;
+    } 
     public static void main (String[] args){
         //HashMap for Fib memoization
         HashMap <Integer, Long> computed = new HashMap<Integer,Long>();
@@ -115,6 +155,16 @@ public class memoization {
         int[] nums1 = {7, 14};
         answer = howSum(300, nums1, answer, memo);
         System.out.println(answer);
+
+        //We have to use a dynamic array and pass it to howSum
+        ArrayList<Integer> bestMemo = new ArrayList<Integer>();
+        //HashMap for howSum memoization
+        HashMap<Integer, ArrayList<Integer>> memo1 = new HashMap<Integer, ArrayList<Integer>>();
+        int[] nums2 = {1,4,5};
+        bestMemo = howSum(8, nums2, bestMemo, memo1);
+        System.out.println(bestMemo);
+
+       
 
     }
 }

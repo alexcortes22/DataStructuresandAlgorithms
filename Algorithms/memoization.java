@@ -132,6 +132,11 @@ public class memoization {
         return shortestArray;
     } 
 
+    /*
+        canConstruct: Write a function that accepts a target string and an array of strings. The function should return
+        a boolean indicating whether or not the target can be constructred by concatenating elements of the word
+        bank array. You may reuse elements in the word bank
+    */
     public static boolean canConstruct(String target, String[]wordBank, HashMap<String, Boolean> memo){
         if(memo.containsKey(target)) return memo.get(target);
 
@@ -151,6 +156,32 @@ public class memoization {
 
         memo.put(target, false);
         return false;
+    }
+
+    /*
+        countConstruct: Write a function that accepts a target string and an array of strings. The function should return
+        a boolean indicating whether or not the target can be constructred by concatenating elements of the word
+        bank array. You may reuse elements in the word bank
+    */
+    public static int countConstruct(String target, String[]wordBank, HashMap<String, Integer> memo){
+        if(memo.containsKey(target)) return memo.get(target);
+
+        if(target == " "){
+            return 1;
+        }
+
+        int totalCount = 0;
+
+        for(String word: wordBank){
+            if(target.indexOf(word) == 0){
+                String suffix = target.substring(word.length());
+                int numWaysofPaths = countConstruct(suffix, wordBank, memo);
+                totalCount += numWaysofPaths;
+            }
+        }
+
+        memo.put(target, totalCount);
+        return totalCount;
     }
     public static void main (String[] args){
         //HashMap for Fib memoization
@@ -190,6 +221,12 @@ public class memoization {
         String[] wordBank = {"e", "ee", "eee", "eeee", "eeeee", "eeeeee"};
         Boolean result3 = canConstruct("eeeeeeeeeeeeeeeeeeeef", wordBank, memo2);
         System.out.println(result3); //should be false
+
+        //HashMap for countConstruct
+        HashMap <String, Integer> memo4 = new HashMap <String, Integer>();
+        String[] wordBank2 = {"ab", "abc", "cd", "def", "abcd"};
+        int result4 = countConstruct("abcdef", wordBank2, memo4);
+        System.out.println(result4); //should be 1
 
     }
 }

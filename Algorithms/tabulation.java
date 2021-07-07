@@ -61,10 +61,41 @@ public class tabulation {
         return table[targetSum];
     }
 
+    /*
+        howSum: Given a target sum and an array of numbers, return a combination of numbers that add up
+        to target sum
+        Complexity:
+                    Time: O(m^2 * n);
+                    Space: O(m^2);
+        //still need to determine correct implementation
+    */
+    public static ArrayList<Integer> howSum(int targetSum, int[] numbers){
+        HashMap<Integer, ArrayList<Integer>> table = new HashMap<Integer,ArrayList<Integer>>(targetSum + 1);
+        for(int i = 1; i < table.size(); i++){
+            table.put(i, null);
+        }
+        table.put(0, new ArrayList<Integer>());
+        for(int i = 0; i < targetSum; i++){
+            if(table.get(i) != null){
+                for(int j = 0; j < numbers.length; j++){
+                    ArrayList<Integer> previous = table.get(i);
+                    previous.add(j);
+                    table.put(i + j, previous);
+                }
+            }
+        }
+        
+        return table.get(targetSum);
+    }
+
     public static void main(String[] args){
         System.out.println(fib(6)); //should return 8
         System.out.println(gridTraveler(3,3)); //should return 6
         int[] nums = {5,4,3};
         System.out.println(canSum(7, nums)); // should return true
+
+        //Test for howSum
+        
+        System.out.println(howSum(7, nums));
     }
 }

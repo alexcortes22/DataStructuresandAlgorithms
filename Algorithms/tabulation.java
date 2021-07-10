@@ -77,8 +77,8 @@ public class tabulation {
         table.put(0, new ArrayList<Integer>());
         for(int i = 0; i < targetSum; i++){
             if(table.get(i) != null){
+                ArrayList<Integer> previous = table.get(i);
                 for(int j = 0; j < numbers.length; j++){
-                    ArrayList<Integer> previous = table.get(i);
                     previous.add(j);
                     table.put(i + j, previous);
                 }

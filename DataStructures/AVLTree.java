@@ -166,7 +166,7 @@ public class AVLTree <T extends Comparable<T>> implements Iterable<T> {
     public boolean remove(T elem){
         if(elem == null) return false;
 
-        if(contains(root, value)){
+        if(contains(root, elem)){
             root = remove(root, elem);
             nodeCount--;
             return true;

@@ -7,7 +7,7 @@ public class InsertionSort{
         @return int[]. The array that was input, sorted in ascending order 
 
     */
-    public int[] InsertionSort(int[] arr){
+    public int[] insertionSort(int[] arr){
         for(int j = 1; j < arr.length; j++){
             int current = arr[j];
             int i = j - 1; 
@@ -27,7 +27,7 @@ public class InsertionSort{
 
         int[] nums = {5,2,4,6,1,3};
 
-        int[] sorted = demo.InsertionSort(nums);
+        int[] sorted = demo.insertionSort(nums);
 
         for(int i = 0; i < sorted.length; i++){
             System.out.println(sorted[i]);

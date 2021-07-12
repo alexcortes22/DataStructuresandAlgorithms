@@ -68,7 +68,7 @@ public class MinIndexedDHeap <T extends Comparable<T>> {
 
     public int pollMinKeyIndex(){
         int minki = peekMinKeyIndex();
-        delete(minKi);
+        delete(minki);
         return minki;
     }
 

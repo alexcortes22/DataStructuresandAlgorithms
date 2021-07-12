@@ -156,7 +156,7 @@ public class BinaryTree <T extends Comparable <T>>{
     //traverse the tree in preorder
     private void preOrderTraversal(Node node){
         if (node == null) System.out.println("No node");
-        System.out.println(Node.data.toString());
+        System.out.println(node.data);
         preOrderTraversal(node.left);
         preOrderTraversal(node.left);
     }
@@ -165,7 +165,7 @@ public class BinaryTree <T extends Comparable <T>>{
     private void inOrderTraversal(Node node){
         if (node == null) System.out.println("No node");
         preOrderTraversal(node.left);
-        System.out.println(Node.data);
+        System.out.println(node.data);
         preOrderTraversal(node.left);
     }
 
@@ -174,7 +174,7 @@ public class BinaryTree <T extends Comparable <T>>{
         if (node == null) System.out.println("No node");
         preOrderTraversal(node.left);
         preOrderTraversal(node.left);
-        System.out.println(Node.data);
+        System.out.println(node.data);
     }
 
     //traverse the tree in level order
